@@ -1,7 +1,7 @@
 /* This is an encryption program that utilizes the TEA Encryption 
  * approach. This program will take two 32 bit  plaintext inputs 
- * from the user and provide the corresponding 32 bit 
- * ciphertext.
+ * from the user, as well as four 32 bit keys, and provide the 
+ * corresponding 32 bit ciphertext.
  * 
  * Author: Bryant Vaughn
  * Date: 08/2019
@@ -48,10 +48,23 @@ public class TEA_Encryption {
         for(int i = 1; i < Tea.L.length; i++) {
             Tea.L[i] = Tea.R[i] = 0x00000000;
         }
+
+        // Encrypt the plaintext user input
+        Tea.encrypt();
+        System.out.println();
+        System.out.println("L[0] = " + Tea.L[0] + "\t R[0] = " + Tea.R[0]);
     }
 
+    // TEA algorithm for encryption
     public void encrypt() {
-        //System.out.println(Integer.toHexString(K[0]).toUpperCase());
-        // need to perform the math calculations
+        
+        for(int i = 1; i < 2; i++) {
+            // i will only be 1, using it for index
+            L[i] = R[i-1];
+            R[i] = (L[i-1] + ((R[i-1] << 4) + K[i-1]) ^ ((R[i-1] >>> 5) + K[i]) ^ (R[i-1] + DELTA_ONE));
+            
+            L[i+1] = R[i];
+            R[i+1] = (L[i] + ((R[i] << 4) + K[i+1]) ^ ((R[i] >>> 5) + K[i+2]) ^ (R[i] + DELTA_TWO));
+        }
     }
 }
