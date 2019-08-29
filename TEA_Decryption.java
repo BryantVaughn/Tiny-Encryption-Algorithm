@@ -10,17 +10,10 @@ import java.util.*;
 
 public class TEA_Decryption {
 
-    // Program driver
-    public static void main(String[] args) {
-        final int DELTA_ONE = 0x11111111;
-        final int DELTA_TWO = 0x22222222;
-        int[] kArray = new int[4];
-        int[] L = new int[3];
-        int[] R = new int[3];
-
-        // Scanner object for user input
-        Scanner keyboard = new Scanner(System.in);
-
-
-    }
+    // Constants and array variables
+    final int DELTA_ONE = 0x11111111;
+    final int DELTA_TWO = 0x22222222;
+    int[] K = new int[4];
+    int[] L = new int[3];
+    int[] R = new int[3];
 }
