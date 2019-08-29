@@ -56,6 +56,9 @@ public class TEA_Encryption {
 
         // Print the output
         Tea.printCiphertext();
+
+        // Close scanner object
+        keyboard.close();
     }
 
     // TEA algorithm for encryption
