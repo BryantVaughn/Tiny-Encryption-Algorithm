@@ -47,10 +47,32 @@ public class TEA_Decryption {
         for(int i = 0; i < Tea.L.length - 1; i++) {
             Tea.L[i] = Tea.R[i] = 0x00000000;
         }
+
+        // Decrypt ciphertext in L[2] and R[2]
+        Tea.decrypt();
+
+        System.out.println();
+
+        // Print the plaintext
+        Tea.printPlaintext();
     }
 
     // Decryption of TEA ciphertext
     public void decrypt() {
+
+        for(int i = 1; i > 0; i--) {
+            // i will only be 1, using it for index
+            R[i] = L[i+1];
+            L[i] = (R[i+1] - (((L[i+1] << 4) + K[i+1]) ^ (L[i+1] + DELTA_TWO) ^ ((L[i+1] >>> 5) + K[i+2])));
+
+            R[i-1] = L[i];
+            L[i-1] = (R[i] - (((L[i] << 4) + K[i-1]) ^ (L[i] + DELTA_ONE) ^ ((L[i] >>> 5) + K[i])));
+        }
+    }
+
+    // Print method for plaintext
+    public void printPlaintext() {
+        // for loop to run through all L[] and R[] values
         
     }
 }
