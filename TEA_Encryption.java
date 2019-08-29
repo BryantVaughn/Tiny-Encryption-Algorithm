@@ -38,7 +38,7 @@ public class TEA_Encryption {
         String L0 = keyboard.nextLine();
         Tea.L[0] = Integer.parseUnsignedInt(L0, 0, L0.length(), 16);
         System.out.println();
-        System.out.println(Integer.toHexString(Tea.L[0]));
+        System.out.println(Integer.toHexString(Tea.L[0]).toUpperCase());
 
         System.out.print("Please input R[0] in Hex String (without '0x'): ");
         String R0 = keyboard.nextLine();
@@ -51,8 +51,11 @@ public class TEA_Encryption {
 
         // Encrypt the plaintext user input
         Tea.encrypt();
+
         System.out.println();
-        System.out.println("L[0] = " + Tea.L[0] + "\t R[0] = " + Tea.R[0]);
+
+        // Print the output
+        Tea.printCiphertext();
     }
 
     // TEA algorithm for encryption
@@ -65,6 +68,15 @@ public class TEA_Encryption {
             
             L[i+1] = R[i];
             R[i+1] = (L[i] + ((R[i] << 4) + K[i+1]) ^ ((R[i] >>> 5) + K[i+2]) ^ (R[i] + DELTA_TWO));
+        }
+    }
+
+    // Print method for ciphertext
+    public void printCiphertext() {
+        // for loop to run through all L[] and R[] values
+        for(int i = 0; i < L.length; i++) {
+            System.out.print("L[" + i + "] = " + Integer.toHexString(L[i]).toUpperCase() + "\t");
+            System.out.println("R[" + i + "] = " + Integer.toHexString(R[i]).toUpperCase());
         }
     }
 }
