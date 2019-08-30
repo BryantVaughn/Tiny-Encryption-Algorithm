@@ -10,6 +10,9 @@
 import java.util.*;
 
 public class TEA_Encryption {
+
+    // Scanner object for user input
+    Scanner keyboard = new Scanner(System.in);
     
     // Constants and array variables
     final int DELTA_ONE = 0x11111111;
@@ -21,65 +24,37 @@ public class TEA_Encryption {
     public static void main(String[] args) {
         TEA_Encryption Tea = new TEA_Encryption();
         
-        // Get keys from user
-        // for(int i = 0; i < Tea.K.length; i++) {
-        //     System.out.print("Please input K[" + i + "] in Hex String (without '0x'): ");
-        //     String key = keyboard.nextLine();
-        //     Tea.K[i] = Integer.parseUnsignedInt(key, 0, key.length(), 16);
-        //     System.out.println();
-        //     System.out.println(Integer.toHexString(Tea.K[i]).toUpperCase());    
-        // }
+        // Call method to get user keys
         Tea.getKeys();
 
-        //Tea.encrypt();
-
-        // Get plaintext from user
-        // System.out.print("Please input L[0] in Hex String (without '0x'): ");
-        // String L0 = keyboard.nextLine();
-        // Tea.L[0] = Integer.parseUnsignedInt(L0, 0, L0.length(), 16);
-        // System.out.println();
-        // System.out.println(Integer.toHexString(Tea.L[0]).toUpperCase());
-
-        // System.out.print("Please input R[0] in Hex String (without '0x'): ");
-        // String R0 = keyboard.nextLine();
-        // Tea.R[0] = Integer.parseUnsignedInt(R0, 0, R0.length(), 16);
+        // Call method to get user plaintext
         Tea.getPlaintext();
 
-        // Initializing L[1], L[2], R[1], and R[2] as 0x00000000
-        // for(int i = 1; i < Tea.L.length; i++) {
-        //     Tea.L[i] = Tea.R[i] = 0x00000000;
-        // }
+        // Call method to initialize L[] and R[]
         Tea.initializeLR();
 
-        // Encrypt the plaintext user input
+        // Call method to encrypt the plaintext in L[0] and R[0]
         Tea.encrypt();
 
         System.out.println();
 
-        // Print the output
+        // Call method to print the output
         Tea.printCiphertext();
     }
 
     // Get keys from user
     public void getKeys() {
-        // Scanner object for user input
-        Scanner keyboard = new Scanner(System.in);
-
+        
         for(int i = 0; i < K.length; i++) {
             System.out.print("Please input K[" + i + "] in Hex String (without '0x'): ");
             String key = keyboard.nextLine();
             K[i] = Integer.parseUnsignedInt(key, 0, key.length(), 16);
             System.out.println();   
         }
-
-        // Closing scanner object
-        keyboard.close();
     }
 
     // Get plaintext from user
     public void getPlaintext() {
-        // Scanner object for user input
-        Scanner keyboard = new Scanner(System.in);
 
         // Getting L[0]
         System.out.print("Please input L[0] in Hex String (without '0x'): ");
@@ -92,9 +67,6 @@ public class TEA_Encryption {
         System.out.print("Please input R[0] in Hex String (without '0x'): ");
         String R0 = keyboard.nextLine();
         R[0] = Integer.parseUnsignedInt(R0, 0, R0.length(), 16);
-
-        // Closing scanner object
-        keyboard.close();
     }
 
     // Initialize L[] and R[]
@@ -122,7 +94,7 @@ public class TEA_Encryption {
     public void printCiphertext() {
         // for loop to run through all L[] and R[] values
         for(int i = 0; i < L.length; i++) {
-            System.out.print("L[" + i + "] = " + Integer.toHexString(L[i]).toUpperCase() + "\t");
+            System.out.print("L[" + i + "] = " + Integer.toHexString(L[i]).toUpperCase() + "\t\t");
             System.out.println("R[" + i + "] = " + Integer.toHexString(R[i]).toUpperCase());
         }
     }
