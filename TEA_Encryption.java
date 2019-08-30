@@ -19,17 +19,17 @@ public class TEA_Encryption {
     int[] R = new int[3];
 
     public static void main(String[] args) {
-        Scanner keyboard = new Scanner(System.in);
         TEA_Encryption Tea = new TEA_Encryption();
         
         // Get keys from user
-        for(int i = 0; i < Tea.K.length; i++) {
-            System.out.print("Please input K[" + i + "] in Hex String (without '0x'): ");
-            String key = keyboard.nextLine();
-            Tea.K[i] = Integer.parseUnsignedInt(key, 0, key.length(), 16);
-            System.out.println();
-            System.out.println(Integer.toHexString(Tea.K[i]).toUpperCase());    
-        }
+        // for(int i = 0; i < Tea.K.length; i++) {
+        //     System.out.print("Please input K[" + i + "] in Hex String (without '0x'): ");
+        //     String key = keyboard.nextLine();
+        //     Tea.K[i] = Integer.parseUnsignedInt(key, 0, key.length(), 16);
+        //     System.out.println();
+        //     System.out.println(Integer.toHexString(Tea.K[i]).toUpperCase());    
+        // }
+        Tea.getKeys();
 
         //Tea.encrypt();
 
@@ -59,6 +59,20 @@ public class TEA_Encryption {
 
         // Close scanner object
         keyboard.close();
+    }
+
+    // Get keys from user
+    public void getKeys() {
+        // Scanner object for user input
+        Scanner keyboard = new Scanner(System.in);
+        
+        for(int i = 0; i < Tea.K.length; i++) {
+            System.out.print("Please input K[" + i + "] in Hex String (without '0x'): ");
+            String key = keyboard.nextLine();
+            Tea.K[i] = Integer.parseUnsignedInt(key, 0, key.length(), 16);
+            System.out.println();
+            System.out.println(Integer.toHexString(Tea.K[i]).toUpperCase());    
+        }
     }
 
     // TEA algorithm for encryption
