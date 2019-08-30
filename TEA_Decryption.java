@@ -63,10 +63,10 @@ public class TEA_Decryption {
         for(int i = 1; i > 0; i--) {
             // i will only be 1, using it for index
             R[i] = L[i+1];
-            L[i] = (R[i+1] - (((L[i+1] << 4) + K[i+1]) ^ (L[i+1] + DELTA_TWO) ^ ((L[i+1] >>> 5) + K[i+2])));
+            L[i] = (R[i+1] - (((L[i+1] << 4) + K[i+1]) ^ ((L[i+1] >>> 5) + K[i+2]) ^ (L[i+1] + DELTA_TWO)));
 
             R[i-1] = L[i];
-            L[i-1] = (R[i] - (((L[i] << 4) + K[i-1]) ^ (L[i] + DELTA_ONE) ^ ((L[i] >>> 5) + K[i])));
+            L[i-1] = (R[i] - (((L[i] << 4) + K[i-1]) ^ ((L[i] >>> 5) + K[i]) ^ (L[i] + DELTA_ONE)));
         }
     }
 
