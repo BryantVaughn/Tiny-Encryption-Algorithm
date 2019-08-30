@@ -20,33 +20,35 @@ public class TEA_Decryption {
 
     // Program driver
     public static void main(String[] args) {
-        Scanner keyboard = new Scanner(System.in);
         TEA_Decryption Tea = new TEA_Decryption();
 
         // Get keys from user
-        for(int i = 0; i < Tea.K.length; i++) {
-            System.out.print("Please input K[" + i + "] in Hex String (without '0x'): ");
-            String key = keyboard.nextLine();
-            Tea.K[i] = Integer.parseUnsignedInt(key, 0, key.length(), 16);
-            System.out.println();
-            System.out.println(Integer.toHexString(Tea.K[i]).toUpperCase());    
-        }
+        // for(int i = 0; i < Tea.K.length; i++) {
+        //     System.out.print("Please input K[" + i + "] in Hex String (without '0x'): ");
+        //     String key = keyboard.nextLine();
+        //     Tea.K[i] = Integer.parseUnsignedInt(key, 0, key.length(), 16);
+        //     System.out.println();
+        //     System.out.println(Integer.toHexString(Tea.K[i]).toUpperCase());    
+        // }
+        Tea.getKeys();
 
         // Get plaintext from user
-        System.out.print("Please input L[2] in Hex String (without '0x'): ");
-        String L2 = keyboard.nextLine();
-        Tea.L[2] = Integer.parseUnsignedInt(L2, 0, L2.length(), 16);
-        System.out.println();
-        System.out.println(Integer.toHexString(Tea.L[2]).toUpperCase());
+        // System.out.print("Please input L[2] in Hex String (without '0x'): ");
+        // String L2 = keyboard.nextLine();
+        // Tea.L[2] = Integer.parseUnsignedInt(L2, 0, L2.length(), 16);
+        // System.out.println();
+        // System.out.println(Integer.toHexString(Tea.L[2]).toUpperCase());
 
-        System.out.print("Please input R[2] in Hex String (without '0x'): ");
-        String R2 = keyboard.nextLine();
-        Tea.R[2] = Integer.parseUnsignedInt(R2, 0, R2.length(), 16);
+        // System.out.print("Please input R[2] in Hex String (without '0x'): ");
+        // String R2 = keyboard.nextLine();
+        // Tea.R[2] = Integer.parseUnsignedInt(R2, 0, R2.length(), 16);
+        Tea.getCiphertext();
 
         // Initializing L[0], L[1], R[0], and R[1] as 0x00000000
-        for(int i = 0; i < Tea.L.length - 1; i++) {
-            Tea.L[i] = Tea.R[i] = 0x00000000;
-        }
+        // for(int i = 0; i < Tea.L.length - 1; i++) {
+        //     Tea.L[i] = Tea.R[i] = 0x00000000;
+        // }
+        Tea.initializeLR();
 
         // Decrypt ciphertext in L[2] and R[2]
         Tea.decrypt();
@@ -55,6 +57,51 @@ public class TEA_Decryption {
 
         // Print the plaintext
         Tea.printPlaintext();
+    }
+
+    // Get keys from user
+    public void getKeys() {
+        // Scanner object for user input
+        Scanner keyboard = new Scanner(System.in);
+
+        for(int i = 0; i < K.length; i++) {
+            System.out.print("Please input K[" + i + "] in Hex String (without '0x'): ");
+            String key = keyboard.nextLine();
+            K[i] = Integer.parseUnsignedInt(key, 0, key.length(), 16);
+            System.out.println();   
+        }
+
+        // Closing scanner object
+        keyboard.close();
+    }
+
+    // Get ciphertext from user
+    public void getCiphertext() {
+        // Scanner object for user input
+        Scanner keyboard = new Scanner(System.in);
+
+        // Getting L[2]
+        System.out.print("Please input L[2] in Hex String (without '0x'): ");
+        String L2 = keyboard.nextLine();
+        L[2] = Integer.parseUnsignedInt(L2, 0, L2.length(), 16);
+
+        System.out.println();
+
+        // Getting R[2]
+        System.out.print("Please input R[2] in Hex String (without '0x'): ");
+        String R2 = keyboard.nextLine();
+        R[2] = Integer.parseUnsignedInt(R2, 0, R2.length(), 16);
+
+        // Closing scanner object
+        keyboard.close();
+    }
+
+    // Initialize L[] and R[]
+    public void initializeLR() {
+        // Initializing L[0], L[1], R[0], and R[1] as 0x00000000
+        for(int i = 0; i < L.length - 1; i++) {
+            L[i] = R[i] = 0x00000000;
+        }
     }
 
     // Decryption of TEA ciphertext

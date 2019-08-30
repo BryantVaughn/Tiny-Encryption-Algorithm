@@ -34,20 +34,22 @@ public class TEA_Encryption {
         //Tea.encrypt();
 
         // Get plaintext from user
-        System.out.print("Please input L[0] in Hex String (without '0x'): ");
-        String L0 = keyboard.nextLine();
-        Tea.L[0] = Integer.parseUnsignedInt(L0, 0, L0.length(), 16);
-        System.out.println();
-        System.out.println(Integer.toHexString(Tea.L[0]).toUpperCase());
+        // System.out.print("Please input L[0] in Hex String (without '0x'): ");
+        // String L0 = keyboard.nextLine();
+        // Tea.L[0] = Integer.parseUnsignedInt(L0, 0, L0.length(), 16);
+        // System.out.println();
+        // System.out.println(Integer.toHexString(Tea.L[0]).toUpperCase());
 
-        System.out.print("Please input R[0] in Hex String (without '0x'): ");
-        String R0 = keyboard.nextLine();
-        Tea.R[0] = Integer.parseUnsignedInt(R0, 0, R0.length(), 16);
+        // System.out.print("Please input R[0] in Hex String (without '0x'): ");
+        // String R0 = keyboard.nextLine();
+        // Tea.R[0] = Integer.parseUnsignedInt(R0, 0, R0.length(), 16);
+        Tea.getPlaintext();
 
         // Initializing L[1], L[2], R[1], and R[2] as 0x00000000
-        for(int i = 1; i < Tea.L.length; i++) {
-            Tea.L[i] = Tea.R[i] = 0x00000000;
-        }
+        // for(int i = 1; i < Tea.L.length; i++) {
+        //     Tea.L[i] = Tea.R[i] = 0x00000000;
+        // }
+        Tea.initializeLR();
 
         // Encrypt the plaintext user input
         Tea.encrypt();
@@ -56,22 +58,50 @@ public class TEA_Encryption {
 
         // Print the output
         Tea.printCiphertext();
-
-        // Close scanner object
-        keyboard.close();
     }
 
     // Get keys from user
     public void getKeys() {
         // Scanner object for user input
         Scanner keyboard = new Scanner(System.in);
-        
-        for(int i = 0; i < Tea.K.length; i++) {
+
+        for(int i = 0; i < K.length; i++) {
             System.out.print("Please input K[" + i + "] in Hex String (without '0x'): ");
             String key = keyboard.nextLine();
-            Tea.K[i] = Integer.parseUnsignedInt(key, 0, key.length(), 16);
-            System.out.println();
-            System.out.println(Integer.toHexString(Tea.K[i]).toUpperCase());    
+            K[i] = Integer.parseUnsignedInt(key, 0, key.length(), 16);
+            System.out.println();   
+        }
+
+        // Closing scanner object
+        keyboard.close();
+    }
+
+    // Get plaintext from user
+    public void getPlaintext() {
+        // Scanner object for user input
+        Scanner keyboard = new Scanner(System.in);
+
+        // Getting L[0]
+        System.out.print("Please input L[0] in Hex String (without '0x'): ");
+        String L0 = keyboard.nextLine();
+        L[0] = Integer.parseUnsignedInt(L0, 0, L0.length(), 16);
+
+        System.out.println();
+
+        // Getting R[0]
+        System.out.print("Please input R[0] in Hex String (without '0x'): ");
+        String R0 = keyboard.nextLine();
+        R[0] = Integer.parseUnsignedInt(R0, 0, R0.length(), 16);
+
+        // Closing scanner object
+        keyboard.close();
+    }
+
+    // Initialize L[] and R[]
+    public void initializeLR() {
+        // Initializing L[1], L[2], R[1], and R[2] as 0x00000000
+        for(int i = 1; i < L.length; i++) {
+            L[i] = R[i] = 0x00000000;
         }
     }
 
