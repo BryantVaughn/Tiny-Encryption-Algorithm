@@ -95,8 +95,14 @@ public class TEA_Decryption {
     public void printPlaintext() {
         // for loop to run through all L[] and R[] values
         for(int i = 2; i > -1; i--) {
-            System.out.print("L[" + i + "] = " + Integer.toHexString(L[i]).toUpperCase() + "\t\t");
-            System.out.println("R[" + i + "] = " + Integer.toHexString(R[i]).toUpperCase());
+
+            // Format Hex Strings
+            String leftHex = String.format("%1$08X", L[i]);
+            String rightHex = String.format("%1$08X", R[i]);
+
+            // Print output
+            System.out.print("L[" + i + "] = " + leftHex + "\t\t");
+            System.out.println("R[" + i + "] = " + rightHex);
         }
     }
 }
