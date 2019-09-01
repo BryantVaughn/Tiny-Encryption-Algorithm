@@ -48,7 +48,7 @@ public class TEA_Encryption {
         for(int i = 0; i < K.length; i++) {
             System.out.print("Please input K[" + i + "] in Hex String (without '0x'): ");
             String key = keyboard.nextLine();
-            K[i] = Integer.parseUnsignedInt(key, 0, key.length(), 16);
+            K[i] = Integer.parseUnsignedInt(key, 16);
             System.out.println();   
         }
     }
@@ -59,14 +59,14 @@ public class TEA_Encryption {
         // Getting L[0]
         System.out.print("Please input L[0] in Hex String (without '0x'): ");
         String L0 = keyboard.nextLine();
-        L[0] = Integer.parseUnsignedInt(L0, 0, L0.length(), 16);
+        L[0] = Integer.parseUnsignedInt(L0, 16);
 
         System.out.println();
 
         // Getting R[0]
         System.out.print("Please input R[0] in Hex String (without '0x'): ");
         String R0 = keyboard.nextLine();
-        R[0] = Integer.parseUnsignedInt(R0, 0, R0.length(), 16);
+        R[0] = Integer.parseUnsignedInt(R0, 16);
     }
 
     // Initialize L[] and R[]
